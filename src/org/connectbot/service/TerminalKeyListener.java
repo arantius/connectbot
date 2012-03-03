@@ -104,7 +104,8 @@ public class TerminalKeyListener implements OnKeyListener, OnSharedPreferenceCha
 		hardKeyboard = (manager.res.getConfiguration().keyboard
 				== Configuration.KEYBOARD_QWERTY);
 
-		hardKeyboard = hardKeyboard && !Build.MODEL.equals("Transformer TF101");
+		hardKeyboard = hardKeyboard && !(Build.MODEL.equals("Transformer TF101") ||
+				Build.MODEL.equals("Transformer Prime TF201"));
 
 		updateKeymode();
 	}
@@ -324,6 +325,7 @@ public class TerminalKeyListener implements OnKeyListener, OnSharedPreferenceCha
 			switch(keyCode) {
 			case KEYCODE_ESCAPE:
 			case KeyEvent.KEYCODE_SEARCH:
+			case KeyEvent.KEYCODE_BACK:		// TL: override back key to generate ESC
 				sendEscape();
 				return true;
 			case KeyEvent.KEYCODE_TAB:
